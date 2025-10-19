@@ -39,13 +39,19 @@ const LoginForm = () => {
               <Input
                 id="email"
                 type="email"
+                className="text-sm"
                 required
                 placeholder="m@example.com"
               />
               <Label htmlFor="password" className="text-sm font-semibold">
                 Password
               </Label>
-              <Input id="password" type="password" required />
+              <Input
+                id="password"
+                type="password"
+                required
+                className="text-sm"
+              />
             </div>
             <div className="mt-4 flex justify-between">
               <div className="flex gap-2">
