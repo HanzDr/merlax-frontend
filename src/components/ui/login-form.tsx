@@ -25,7 +25,6 @@ const LoginForm = ({ form, onSubmit }: LoginFormProps) => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    reset,
   } = form;
   return (
     <Card className="w-full max-w-sm px-4 py-8 shadow-md">
