@@ -1,9 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
-
-function App() {
-  return <h1>Hello World</h1>;
-}
+import App from "./App.tsx";
 
 describe("App", () => {
   it("renders the heading", () => {
