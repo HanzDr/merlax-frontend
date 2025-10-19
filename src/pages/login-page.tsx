@@ -9,7 +9,7 @@ const LoginPage = () => {
     defaultValues: { email: "", password: "" },
   });
 
-  // Logic placeholder for now
+  // Logic placeholder for noww
   const onSubmit = async (loginFormData: loginFormData) => {
     try {
       console.log("Submitting to API:", loginFormData);
