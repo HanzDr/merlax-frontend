@@ -1,6 +1,5 @@
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
@@ -67,7 +66,9 @@ const LoginForm = () => {
         </CardContent>
         <CardFooter>
           <div className="flex flex-col w-full gap-2">
-            <Button className="bg-yellow-400">Sign in</Button>
+            <Button className="bg-yellow-400" type="submit">
+              Sign in
+            </Button>
             <Button className="bg-white border-2 text-black hover:bg-accent">
               <FcGoogle /> Sign in with google
             </Button>
