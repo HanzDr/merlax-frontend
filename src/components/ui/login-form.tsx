@@ -12,13 +12,21 @@ import { Link } from "react-router-dom";
 import { Button } from "./button";
 import { Checkbox } from "./checkbox";
 import { FcGoogle } from "react-icons/fc";
+import type { UseFormReturn } from "react-hook-form";
+import { type loginFormData } from "@/schemas/auth-schema";
 
-interface LoginForm {
-  email: string;
-  password: string;
+interface LoginFormProps {
+  form: UseFormReturn<loginFormData>;
+  onSubmit: (data: loginFormData) => void;
 }
 
-const LoginForm = () => {
+const LoginForm = ({ form, onSubmit }: LoginFormProps) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = form;
   return (
     <Card className="w-full max-w-sm px-4 py-8 shadow-md">
       <CardHeader>
@@ -30,22 +38,41 @@ const LoginForm = () => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form action="submit">
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-2">
-            <Label htmlFor="email" className="text-sm font-semibold">
-              Email
-            </Label>
-            <Input
-              id="email"
-              type="email"
-              className="text-sm"
-              required
-              placeholder="m@example.com"
-            />
-            <Label htmlFor="password" className="text-sm font-semibold">
-              Password
-            </Label>
-            <Input id="password" type="password" required className="text-sm" />
+            <div>
+              <Label htmlFor="email" className="text-sm font-semibold">
+                Email
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                className="text-sm"
+                required
+                placeholder="m@example.com"
+                {...register("email")}
+              />
+              {errors.email && (
+                <p className="text-red-500 text-xs">{errors.email.message}</p>
+              )}
+            </div>
+            <div>
+              <Label htmlFor="password" className="text-sm font-semibold">
+                Password
+              </Label>
+              <Input
+                id="password"
+                type="password"
+                required
+                className="text-sm"
+                {...register("password")}
+              />
+              {errors.password && (
+                <p className="text-red-500 text-xs">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
           </div>
           <div className="mt-4 flex justify-between">
             <div className="flex gap-2">
@@ -66,8 +93,12 @@ const LoginForm = () => {
       </CardContent>
       <CardFooter>
         <div className="flex flex-col w-full gap-2">
-          <Button className="bg-yellow-400" type="submit">
-            Sign in
+          <Button
+            className="bg-yellow-400"
+            type="submit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Signing in..." : "Sign in"}
           </Button>
           <Button className="bg-white border-2 text-black hover:bg-accent">
             <FcGoogle /> Sign in with google
