@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import router from "./routes/app-routes";
+import "react-phone-number-input/style.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

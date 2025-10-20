@@ -25,13 +25,12 @@ const LoginForm = ({ form, onSubmit }: LoginFormProps) => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    reset,
   } = form;
   return (
     <Card className="w-full max-w-sm px-4 py-8 shadow-md">
       <CardHeader>
         <CardTitle className="text-yellow-400 text-3xl font-bold text-center">
-          MERLAX
+          M E R L A X
         </CardTitle>
         <CardDescription className="text-center text-xs">
           Welcome back! Please enter your details
@@ -76,7 +75,10 @@ const LoginForm = ({ form, onSubmit }: LoginFormProps) => {
           </div>
           <div className="mt-4 flex justify-between">
             <div className="flex gap-2">
-              <Checkbox id="remember-me" />
+              <Checkbox
+                id="remember-me"
+                className="data-[state=checked]:bg-yellow-400 data-[state=checked]:border-yellow-400"
+              />
               <Label htmlFor="remember-me" className="text-xs font-semibold">
                 Remember me
               </Label>
