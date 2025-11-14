@@ -17,7 +17,12 @@ export type loginFormData = z.infer<typeof loginFormSchema>;
 export const signUpFormSchema = z
   .object({
     mobileNumber: z.string(),
+    firstName: z.string(),
+
+    lastName: z.string(),
+    phoneNumber: z.string(),
     email: z.string().email("Invalid email address"),
+    birthdate: z.date(),
     password: z
       .string()
       .min(8, "Password must be at least 8 characters long")
