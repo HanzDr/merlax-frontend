@@ -16,13 +16,10 @@ export type loginFormData = z.infer<typeof loginFormSchema>;
 
 export const signUpFormSchema = z
   .object({
-    mobileNumber: z.string(),
     firstName: z.string(),
-
     lastName: z.string(),
-    phoneNumber: z.string(),
     email: z.string().email("Invalid email address"),
-    birthdate: z.date(),
+    mobileNumber: z.string(),
     password: z
       .string()
       .min(8, "Password must be at least 8 characters long")
@@ -33,7 +30,7 @@ export const signUpFormSchema = z
       ),
     confirmPassword: z.string(),
   })
-  .refine((data) => data.password === data.confirmPassword, {
+  .refine((data) => data.password !== data.confirmPassword, {
     message: "Passwords do not match",
     path: ["confirmPassword"],
   });

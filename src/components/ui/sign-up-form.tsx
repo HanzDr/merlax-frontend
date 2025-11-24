@@ -7,7 +7,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Label } from "@radix-ui/react-label";
-
+import { Checkbox } from "./checkbox";
+import { Link } from "react-router-dom";
 import { type signUpFormData } from "@/schemas/auth-schema";
 import type { UseFormReturn } from "react-hook-form";
 import { Controller } from "react-hook-form";
@@ -15,7 +16,6 @@ import { Input } from "./input";
 import { PhoneInput } from "./phone-input";
 import { FcGoogle } from "react-icons/fc";
 import { Button } from "./button";
-import { DatePicker } from "../date-picker";
 
 interface SignUpFormProps {
   form: UseFormReturn<signUpFormData>;
@@ -45,12 +45,12 @@ const SignUpForm = ({ form, onSubmit }: SignUpFormProps) => {
           <div className="flex flex-col gap-2">
             {/* First Name */}
             <div>
-              <Label htmlFor="firstName" className="text-sm font-semibold">
+              <Label htmlFor="email" className="text-sm font-semibold">
                 First Name
               </Label>
               <Input
                 id="firstName"
-                type="name"
+                type="text"
                 required
                 className="text-sm"
                 {...register("firstName")}
@@ -61,68 +61,25 @@ const SignUpForm = ({ form, onSubmit }: SignUpFormProps) => {
                 </p>
               )}
             </div>
-
             {/* Last Name */}
             <div>
-              <Label htmlFor="lastName" className="text-sm font-semibold">
+              <Label htmlFor="email" className="text-sm font-semibold">
                 Last Name
               </Label>
               <Input
                 id="lastName"
-                type="name"
+                type="text"
                 required
                 className="text-sm"
                 {...register("lastName")}
               />
-              {errors.lastName && (
+              {errors.firstName && (
                 <p className="text-red-500 text-xs">
-                  {errors.lastName.message}
+                  {errors.firstName.message}
                 </p>
               )}
             </div>
 
-            {/* Birthdate */}
-            <div>
-              <Label htmlFor="birthdate" className="text-sm font-semibold">
-                Birthdate
-              </Label>
-              <Controller
-                name="birthdate"
-                control={control}
-                render={({ field }) => (
-                  <DatePicker value={field.value} onChange={field.onChange} />
-                )}
-              />
-
-              {errors.birthdate && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.birthdate.message}
-                </p>
-              )}
-            </div>
-            {/* Phone Number */}
-            <div>
-              <Label htmlFor="number" className="text-sm font-semibold">
-                Phone Number
-              </Label>
-              <Controller
-                name="mobileNumber"
-                control={control}
-                render={({ field }) => (
-                  <PhoneInput
-                    {...field}
-                    defaultCountry="PH"
-                    placeholder="9XX XXX XXXX"
-                    required
-                  />
-                )}
-              />
-              {errors.mobileNumber && (
-                <p className="text-red-500 text-xs">
-                  {errors.mobileNumber.message}
-                </p>
-              )}
-            </div>
             {/* Email */}
             <div>
               <Label htmlFor="email" className="text-sm font-semibold">
@@ -139,6 +96,30 @@ const SignUpForm = ({ form, onSubmit }: SignUpFormProps) => {
                 <p className="text-red-500 text-xs">{errors.email.message}</p>
               )}
             </div>
+            {/* Mobile Number */}
+            <div>
+              <Label htmlFor="number" className="text-sm font-semibold">
+                Phone Number
+              </Label>
+              <Controller
+                name="mobileNumber"
+                control={control}
+                render={({ field }) => (
+                  <PhoneInput
+                    {...field}
+                    defaultCountry="PH"
+                    placeholder="09XX XXX XXXX"
+                    required
+                  />
+                )}
+              />
+              {errors.mobileNumber && (
+                <p className="text-red-500 text-xs">
+                  {errors.mobileNumber.message}
+                </p>
+              )}
+            </div>
+
             {/* Password */}
             <div>
               <Label htmlFor="password" className="text-sm font-semibold">
@@ -157,13 +138,13 @@ const SignUpForm = ({ form, onSubmit }: SignUpFormProps) => {
                 </p>
               )}
             </div>
-            {/* Confirm Password */}
+            {/* Re-Enter Password */}
             <div>
               <Label
                 htmlFor="confirmPassword"
                 className="text-sm font-semibold"
               >
-                Confirm password
+                Re-Enter your password
               </Label>
               <Input
                 id="confirmPassword"
@@ -179,6 +160,21 @@ const SignUpForm = ({ form, onSubmit }: SignUpFormProps) => {
               )}
             </div>
           </div>
+          <div className="mt-4 flex justify-between">
+            <div className="flex gap-2">
+              <Checkbox id="remember-me" />
+              <Label htmlFor="remember-me" className="text-xs font-semibold">
+                Remember me
+              </Label>
+            </div>
+
+            <Link
+              to="/forgot-password"
+              className="text-xs text-blue-600 hover:underline text-center"
+            >
+              Forgot Password?
+            </Link>
+          </div>
         </form>
       </CardContent>
       <CardFooter>
@@ -189,7 +185,7 @@ const SignUpForm = ({ form, onSubmit }: SignUpFormProps) => {
               type="submit"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Creating Your Account" : "Join the Style Club"}
+              Sign in
             </Button>
             <p className="text-center font-bold text-xs">or</p>
             <Button className="bg-white border-2 text-black hover:bg-accent">
